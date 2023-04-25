@@ -67,19 +67,18 @@ body {
 
 .introText {
     width: 50%;
-    background-color: red;
-    display: flex;
 }
 
 .introText p {
     width: 50%;
     margin-left: 10rem;
+    text-align: justify;
 }
 
 .introText .button {
-    flex: 1 0;
-    align-self: flex-end;
-    justify-self: flex-end;
+    position: relative;
+    top: 10%;
+    left: 49%;
 }
 
 
