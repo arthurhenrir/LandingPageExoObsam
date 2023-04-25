@@ -1,0 +1,85 @@
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    color: #0C1E7F;
+}
+
+.navbar {
+    display: flex;
+    border-bottom: 2px;
+    border-bottom-style: solid;
+    width: 65%;
+    height: 5rem;
+}
+
+.button {
+    margin: 1rem;
+    height: 20px;
+    background-color: #FFC38B;
+    padding: 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background-color: #ffe9d4;
+    color: #FFC38B;
+    cursor: pointer;
+}
+
+.logo {
+    margin-top: 10px;
+    height: 3rem;
+}
+
+.faleConosco {
+    width: auto;
+    height: 7rem;
+    margin-top: -20px;
+}
+
+.socialLogo {
+    margin-top: 13px;
+    width: auto;
+    height: 3rem;
+}
+
+.containerBanner {
+    background-color: #FFC38B;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    margin-left: -8px;
+}
+
+.containerBanner {
+    margin-top: 10px;
+    display: flex;
+}
+
+.containerIntro {
+    display: flex;
+}
+
+.introText {
+    width: 50%;
+    background-color: red;
+    display: flex;
+}
+
+.introText p {
+    width: 50%;
+    margin-left: 10rem;
+}
+
+.introText .button {
+    flex: 1 0;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
+
