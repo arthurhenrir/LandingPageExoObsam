@@ -3,9 +3,13 @@ body {
     padding: 0;
     margin: 0;
     background-color: white;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Abhaya Libre', serif;
     font-weight: bold;
     color: #0C1E7F;
+}
+
+h1 {
+    font-size: 50px;
 }
 
 .navbar {
@@ -14,21 +18,23 @@ body {
     border-bottom-style: solid;
     width: 65%;
     height: 5rem;
+    margin-left: 1rem;
 }
 
 .button {
     margin: 1rem;
-    height: 20px;
+    height: 18px;
     background-color: #FFC38B;
     padding: 12px;
     border-radius: 10px;
-    transition: 0.3s;
+    text-align: center;
 }
 
 .button:hover {
     background-color: #ffe9d4;
     color: #FFC38B;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 .logo {
@@ -48,17 +54,14 @@ body {
     height: 3rem;
 }
 
-.containerBanner {
+.containerBanner{
     background-color: #FFC38B;
-    height: 10rem;
-    display: flex;
-    justify-content: center;
-    margin-left: -8px;
+    margin-top: 10px;
 }
 
-.containerBanner {
-    margin-top: 10px;
-    display: flex;
+.containerBanner img{
+    max-height: 15rem;
+    margin-left: 20%;
 }
 
 .containerIntro {
@@ -67,18 +70,65 @@ body {
 
 .introText {
     width: 50%;
+    display: grid;
 }
 
 .introText p {
     width: 50%;
-    margin-left: 10rem;
+    margin-left: 20%;
     text-align: justify;
+    font-size: 18px;
 }
 
 .introText .button {
-    position: relative;
-    top: 10%;
-    left: 49%;
+    justify-self: end;
+    margin-right: 20%;
 }
 
+.introVideo {
+    width: 50%;
+    display: grid;
+}
 
+.introVideo iframe {
+    position: relative;
+    top: 5%;
+    left: 20%;
+    border-radius: 20px;
+    margin-bottom: 2.2rem;
+}
+
+.introVideo .button {
+    justify-self: end;
+    margin-right: 36%;
+    position: relative;
+    left: 15%;
+}
+
+.divisor {
+    border-bottom: 2px solid #0C1E7F;
+    margin: 1rem 10% 0 10%;
+}
+
+.containerNoticias {
+    width: 50%;
+    margin-left: 10%;
+    background-color: red;
+    display:flex;
+}
+
+.noticias * {
+    margin: 0;
+}
+
+.noticias img {
+    max-width: 30rem;
+}
+
+.noticias {
+    display: grid;
+}
+
+.noticias .button {
+    margin: 2rem 10px 0 75%;
+}
