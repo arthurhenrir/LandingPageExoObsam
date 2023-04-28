@@ -20,6 +20,11 @@ h1 {
     margin: 0 15% 0 15%;
 }
 
+iframe {
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
 .navbar {
     display: flex;
     border-bottom: 2px;
@@ -76,35 +81,33 @@ h1 {
     display: flex;
 }
 
-.introText {
+.containerIntro .introText {
     width: 50%;
     display: grid;
 }
 
-.introText p {
+.containerIntro .introText p {
     width: 70%;
     text-align: justify;
 }
 
-.introText .button {
+.containerIntro .introText .button {
     justify-self: end;
     margin: 0;
 }
 
-.introVideo {
+.containerIntro .introVideo {
     width: 50%;
     display: grid;
 }
 
-.introVideo iframe {
-    margin-top: 20px;
+.containerIntro .introVideo iframe {
     height: 220px;
     width: 400px;
-    border-radius: 20px;
     justify-self: center;
 }
 
-.introVideo .button {
+.containerIntro .introVideo .button {
     justify-self: end;
     align-self: end;
     margin: 0;
@@ -119,31 +122,31 @@ h1 {
     display:flex;
 }
 
-.noticias {
+.containerNoticias .noticias {
     display: grid;
     width: 50%;
 }
 
-.noticias * {
+.containerNoticias .noticias * {
     margin: 0;
 }
 
-.noticias img {
+.containerNoticias .noticias img {
     max-width: 70%;
 }
 
-.noticias .button {
+.containerNoticias .noticias .button {
     align-self: end;
     justify-self: end;
 }
 
-.noticiasText {
+.containerNoticias .noticiasText {
     width: 50%;
     margin-top: 40px;
     display: grid;
 }
 
-.noticiasText .button {
+.containerNoticias .noticiasText .button {
     margin: 0;
     justify-self: end;
     align-self: end;
@@ -151,5 +154,102 @@ h1 {
 
 .containerLogin {
     display: flex;
-    background-color: red;
+}
+
+.containerLogin .loginVideo {
+    width: 50%;
+}
+
+.containerLogin .loginVideo iframe {
+    height: 385px;
+    width: 580px;
+}
+
+.containerLogin .login {
+    background-color: #ffe9d4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 100px 0;
+} 
+
+.containerLogin .login .loginBox {
+    display: grid;
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    width: 50%;
+}
+
+.containerLogin .login .loginBox img {
+    justify-self: center;
+}
+
+.containerLogin .login .loginBox input {
+    margin-top: 10px;
+    background-color: rgb(209, 209, 209);
+    border: 0;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.containerLogin .login .loginBox input::placeholder {
+    padding: 10px;
+}
+
+.containerLogin .login .loginBox .checkbox-container  {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+}
+
+.containerLogin .login .loginBox .checkbox-container input {
+    display: none;
+}
+
+.containerLogin .login .loginBox .checkbox-container .checkmark {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border: 2px solid rgb(0, 119, 255);
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+
+.containerLogin .login .loginBox .checkbox-container input:checked + .checkmark {
+    background-color: rgb(0, 119, 255);
+}
+
+.containerLogin .login .loginBox .checkbox-container .checkmark:after {
+    content: "";
+    display: none;
+}
+
+.containerLogin .login .loginBox .checkbox-container input:checked + .checkmark:after {
+    display: block;
+    content: "";
+    width: 3px;
+    height: 5px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-left: 2px;
+}
+  
+.containerLogin .login .loginBox button {
+    width: 100%;
+    height: 40px;
+    background-color: #FFC38B;
+    border-radius: 10px;
+    border: 0;
+    font-family: 'Abhaya Libre', serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+.containerLogin .login .loginBox a{
+    margin-top: -15px;
 }
