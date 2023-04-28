@@ -8,8 +8,16 @@ body {
     color: #0C1E7F;
 }
 
+p {
+    font-size: 18px;
+}
+
 h1 {
     font-size: 50px;
+}
+
+.containerBody {
+    margin: 0 15% 0 15%;
 }
 
 .navbar {
@@ -74,15 +82,13 @@ h1 {
 }
 
 .introText p {
-    width: 50%;
-    margin-left: 20%;
+    width: 70%;
     text-align: justify;
-    font-size: 18px;
 }
 
 .introText .button {
     justify-self: end;
-    margin-right: 20%;
+    margin: 0;
 }
 
 .introVideo {
@@ -91,30 +97,31 @@ h1 {
 }
 
 .introVideo iframe {
-    position: relative;
-    top: 5%;
-    left: 20%;
+    margin-top: 20px;
+    height: 220px;
+    width: 400px;
     border-radius: 20px;
-    margin-bottom: 2.2rem;
+    justify-self: center;
 }
 
 .introVideo .button {
     justify-self: end;
-    margin-right: 36%;
-    position: relative;
-    left: 15%;
+    align-self: end;
+    margin: 0;
 }
 
 .divisor {
     border-bottom: 2px solid #0C1E7F;
-    margin: 1rem 10% 0 10%;
+    margin: 20px 0;
 }
 
 .containerNoticias {
-    width: 50%;
-    margin-left: 10%;
-    background-color: red;
     display:flex;
+}
+
+.noticias {
+    display: grid;
+    width: 50%;
 }
 
 .noticias * {
@@ -122,13 +129,27 @@ h1 {
 }
 
 .noticias img {
-    max-width: 30rem;
-}
-
-.noticias {
-    display: grid;
+    max-width: 70%;
 }
 
 .noticias .button {
-    margin: 2rem 10px 0 75%;
+    align-self: end;
+    justify-self: end;
+}
+
+.noticiasText {
+    width: 50%;
+    margin-top: 40px;
+    display: grid;
+}
+
+.noticiasText .button {
+    margin: 0;
+    justify-self: end;
+    align-self: end;
+}
+
+.containerLogin {
+    display: flex;
+    background-color: red;
 }
