@@ -10,6 +10,7 @@ body {
 
 p {
     font-size: 18px;
+    text-align: justify;
 }
 
 h1 {
@@ -23,6 +24,10 @@ h1 {
 iframe {
     margin-top: 20px;
     border-radius: 20px;
+}
+
+button {
+    cursor: pointer;
 }
 
 .navbar {
@@ -161,8 +166,8 @@ iframe {
 }
 
 .containerLogin .loginVideo iframe {
-    height: 385px;
-    width: 580px;
+    height: 220px;
+    width: 400px;
 }
 
 .containerLogin .login {
@@ -172,6 +177,7 @@ iframe {
     align-items: center;
     width: 50%;
     padding: 100px 0;
+    margin-right: 20px;
 } 
 
 .containerLogin .login .loginBox {
@@ -202,6 +208,7 @@ iframe {
     display: flex;
     align-items: center;
     justify-self: center;
+    cursor: pointer;
 }
 
 .containerLogin .login .loginBox .checkbox-container input {
