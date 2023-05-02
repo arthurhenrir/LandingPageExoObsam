@@ -260,3 +260,9 @@ button {
 .containerLogin .login .loginBox a{
     margin-top: -15px;
 }
+
+.circle img {
+    width: 40%;
+    border-radius: 100%;
+    height: auto;
+  }
