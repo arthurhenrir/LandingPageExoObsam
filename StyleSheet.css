@@ -78,7 +78,7 @@ button {
 }
 
 .containerBanner{
-    background-color: red;
+    background-color: #FFC38B;
     margin-top: 10px;
 }
 
@@ -302,7 +302,7 @@ button {
 
 .underBar {
     display: flex;
-    margin-top: 50px;
+    margin: 25px 0;
 }
 
 .underBar .underImg2 {
