@@ -1,0 +1,348 @@
+h1,h2,h3,button,span,div{
+  font-family: Abhaya Libre Regular;
+  color: #0C1E7F;
+}
+
+.cards {
+  background-color: #fcc48c;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /*grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(3, 1fr); */
+}
+
+
+.cards1Line {
+  display: grid;
+  grid-template-rows: max-content;
+  background-color: #fcc48c;
+}
+
+.foto{
+  height: 100px;
+  width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  border: 1px solid #FCC48C;
+}
+
+.desc-foto{
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+
+
+.frameTopLogin {
+  display: grid;
+  height: 25%;
+  background-color: #fcc48c;
+  padding: 25px; 
+  font-size: xx-large;
+  color: white;
+  text-align: center;
+  font-size: 28px;
+  
+}
+
+.buttonWhite{
+  background-color: white;
+  color: #0C1E7F;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  width: 100px;
+  font-size: 16px;
+  padding: 10px; 
+}
+
+.buttonOrange{
+  background-color: #fcc48c;
+  color: #0C1E7F;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  width: 100px;
+  font-size: 16px;
+  padding: 10px; 
+}
+
+.frame1card1 {
+  background-color: white;
+  color: #0C1E7F;
+  padding: 25px;
+}
+
+.frame1card2 {
+  background-color: #fcc48c;
+  /*background-image: url('/commons-extension/skin/images/malha-laranja-completa.png');      
+  background-size: cover;
+  background-position: top;*/  
+  color: white;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.frame2card1  {
+  background-color: #0C1E7F;  
+  padding: 25px;
+}
+
+.frameNewscard1  {
+  background-color: white;
+  background-image: url('/welcome-page-obsam/skin/imgs/barra-news.png');      
+  background-size: 50% 30px;
+  background-repeat: no-repeat;
+  color: #0C1E7F;  
+  height: 450px;
+}
+
+@media (max-width: 600px) {
+
+  .frameNewscard1  {
+
+    height: 600px;
+
+  }
+
+}
+
+
+.frame2card1 > * {
+  color: white;
+}
+
+.frame3card1 {
+  background-color: white;
+  color: #0C1E7F;
+  padding: 25px;
+}
+
+.frame3card1 > * {
+  color: #0C1E7F;
+}
+
+
+
+
+.frame4card1  {
+  background-color: #fcc48c;  
+  padding: 25px;
+  text-align: center;
+}
+
+.frame4card2  {
+  background-color: #0C1E7F; 
+  padding-top: 25px;    
+}
+
+
+.content-box-login {
+  text-align: center;
+  width: 30%;
+  min-width: 300px;
+  font-family: Abhaya Libre Regular;
+  margin: auto auto auto auto;
+  background-color: white;
+  padding-bottom: 25px;
+  font-size: 18px; 
+  border-radius: 10px;
+
+}
+
+input#username, input#password{
+  background-color: #e8f0fd;
+  border: none;
+  height: 30px;
+  width: 80%;
+  padding: 8px;
+  font-family: Abhaya Libre Regular;
+  color: #0C1E7F;
+  font-size: 18px;
+}
+
+a{
+  color: #0C1E7F;
+  text-decoration: underline;
+}
+
+.button{
+  background-color: #fcc48c;
+  color: #0C1E7F;
+  border-radius: 4px;
+  border: none;
+  padding: 8px;
+  font-weight: bold;
+  width: 80%;
+  font-size: 18px;
+}
+
+.brandingImage{
+  width: 60%;
+  height: 60%;
+}
+
+.bottomMessage{
+  font-weight: normal;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid var(--allPagesPrimaryBackgroundLight,#f8f8f8);
+    border-bottom: 1px solid #fff;
+}
+
+
+/*
+body{
+
+  
+  background-image: url('/commons-extension/skin/images/malha-laranja-completa.png');      
+  background-color: #fcc48c;
+  background-size: 50%;
+  background-repeat: repeat-y;
+  background-position: right;
+  height: 100%;
+  margin: 0;
+  font-family: Abhaya Libre Regular;
+  color: #0C1E7F;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+
+.flex-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+}
+
+.uiLogin {
+  display: block;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  width: 90%;
+}
+
+
+
+
+.content-box-message {
+  text-align: left;
+  font-size: 22px; 
+  margin: auto;   
+  float: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  line-height: 30px;
+  width: 40%;
+ 
+
+}
+
+.content-box-login {
+  text-align: center;
+  width: 30%;
+  min-width: 300px;
+  font-family: Abhaya Libre Regular;
+  margin: auto auto auto auto;
+  background-color: white;
+  padding-bottom: 25px;
+  font-size: 18px; 
+  border-radius: 10px;
+  height: 100%;
+  
+
+}
+
+input#username, input#password{
+  background-color: #e8f0fd;
+  border: none;
+  height: 30px;
+  width: 80%;
+  padding: 8px;
+  font-family: Abhaya Libre Regular;
+  color: #0C1E7F;
+  font-size: 18px;
+}
+
+a{
+  color: #0C1E7F;
+  text-decoration: underline;
+}
+
+.button{
+  background-color: #fcc48c;
+  color: #0C1E7F;
+  border-radius: 4px;
+  border: none;
+  padding: 8px;
+  font-weight: bold;
+  width: 80%;
+  font-size: 18px;
+}
+
+@media (max-width: 800px) {
+  .content-box-message {
+      display: none;
+      
+  }
+  .uiLogin{
+    width: auto;
+  }
+
+  body{
+    background-image: none;
+  }
+
+}
+
+.brandingImage{
+  width: 60%;
+  height: 60%;
+}
+
+.bottomMessage{
+  font-weight: normal;
+}
+
+hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid var(--allPagesPrimaryBackgroundLight,#f8f8f8);
+    border-bottom: 1px solid #fff;
+}
+
+.container {  
+  display: grid;  
+  grid-template-columns: 1fr 1fr;  
+  grid-template-rows: 100% ;  
+}
+
+*/
+

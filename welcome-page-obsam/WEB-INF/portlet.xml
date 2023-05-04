@@ -1,0 +1,64 @@
+<portlet-app version="2.0"
+  xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+	<portlet>
+		<portlet-name>obsam-welcome-page</portlet-name>
+		<portlet-class>obsam.exo.extra.WelcomePage</portlet-class>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.WelcomePage.WelcomePage</resource-bundle>
+		<portlet-info>
+			<title>Coopere - Welcome Page</title>
+		</portlet-info>
+		
+	</portlet>
+
+	<portlet>
+		<portlet-name>obsam-agreement-term</portlet-name>
+		<portlet-class>obsam.exo.extra.AgreementTermPage</portlet-class>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.WelcomePage.WelcomePage</resource-bundle>
+		<portlet-info>
+			<title>Agreement Term</title>
+		</portlet-info>
+	</portlet>
+
+	<portlet>
+		<portlet-name>obsam-agreement-term-inner</portlet-name>
+		<portlet-class>obsam.exo.extra.AgreementTermInnerPage</portlet-class>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.WelcomePage.WelcomePage</resource-bundle>
+		<portlet-info>
+			<title>Agreement Term Inner</title>
+		</portlet-info>
+	</portlet>
+
+<portlet>
+		<portlet-name>obsam-google-form-register</portlet-name>
+		<portlet-class>obsam.exo.extra.GoogleFormRegisterPage</portlet-class>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.WelcomePage.WelcomePage</resource-bundle>
+		<portlet-info>
+			<title>Google Form Register</title>
+		</portlet-info>
+	</portlet>
+
+
+
+	
+
+	
+
+</portlet-app>

@@ -1,0 +1,54 @@
+<web-app
+        version="3.0"
+        metadata-complete="true"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+  <display-name>welcome-page-obsam</display-name>
+
+ <servlet id="servlet-1">
+  <servlet-name>WelcomePageObsam</servlet-name>
+  <servlet-class>obsam.exo.extra.WelcomePage</servlet-class>
+ </servlet>
+ <servlet-mapping id="servletMapping-1">
+  <servlet-name>WelcomePageObsam</servlet-name>
+  <url-pattern>/welcome-page-obsam</url-pattern>
+ </servlet-mapping>
+
+  <servlet id="servlet-2">
+  <servlet-name>AgreementTermPage</servlet-name>
+  <servlet-class>obsam.exo.extra.AgreementTermPage</servlet-class>
+ </servlet>
+ <servlet-mapping id="servletMapping-2">
+  <servlet-name>AgreementTermPage</servlet-name>
+  <url-pattern>/agreement-term-obsam-servlet</url-pattern>
+ </servlet-mapping>
+
+ <servlet id="servlet-3">
+  <servlet-name>AgreementTermInnerPage</servlet-name>
+  <servlet-class>obsam.exo.extra.AgreementTermInnerPage</servlet-class>
+ </servlet>
+ <servlet-mapping id="servletMapping-3">
+  <servlet-name>AgreementTermInnerPage</servlet-name>
+  <url-pattern>/agreement-term-inner-obsam-servlet</url-pattern>
+ </servlet-mapping>
+
+<servlet id="servlet-4">
+  <servlet-name>GoogleFormRegisterPage</servlet-name>
+  <servlet-class>obsam.exo.extra.GoogleFormRegisterPage</servlet-class>
+ </servlet>
+ <servlet-mapping id="servletMapping-4">
+  <servlet-name>GoogleFormRegisterPage</servlet-name>
+  <url-pattern>/google-form-register-servlet</url-pattern>
+ </servlet-mapping>
+
+ 
+  <jsp-config>
+    <taglib>
+      <taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>
+      <taglib-location>/tld/portlet_2_0.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+
+</web-app>
