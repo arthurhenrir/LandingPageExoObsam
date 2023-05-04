@@ -1,8 +1,5 @@
 body {
-    width: 100%;
-    padding: 0;
     margin: 0;
-    background-color: white;
     font-family: 'Abhaya Libre', serif;
     font-weight: bold;
     color: #0C1E7F;
@@ -17,19 +14,20 @@ h1 {
     font-size: 50px;
 }
 
-/** TA RESPONSIVO PAPAI **/
+@media (max-width: 450px) {
+    .containerBody {
+        width: 100%;
+    }
+}
+
+@media (min-width: 451px) {
+    .containerBody {
+        margin: 0 15%;
+    }
+}
 
 .ResponsivoPapai {  
     display: grid;  
-    grid-template-columns: 1fr 1fr 1fr;  
-    grid-template-rows: 50px 50px;  
-}
-
-
-.containerBody {
-    margin: 0 15% 0 15%;
-    display: grid;
-    justify-content: center;
 }
 
 iframe {
@@ -42,7 +40,6 @@ button {
 }
 
 .navbar {
-    margin: 0 15% 0 15%;
     display: flex;
     border-bottom: 2px;
     border-bottom-style: solid;
@@ -88,12 +85,14 @@ button {
 
 .containerBanner{
     background-color: #FFC38B;
+    width: 100%;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .containerBanner img{
-    max-height: 15rem;
-    margin-left: 20%;
+    width: 50%;
 }
 
 .containerIntro {
@@ -214,10 +213,7 @@ button {
     border: 0;
     border-radius: 5px;
     height: 40px;
-}
-
-.containerLogin .login .loginBox input::placeholder {
-    padding: 10px;
+    padding: 0 10px;
 }
 
 .containerLogin .login .loginBox .checkbox-container  {

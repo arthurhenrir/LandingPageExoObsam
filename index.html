@@ -12,6 +12,7 @@
     <title>Coopere Obsam</title>
 </head>
 <body>
+    <!--Navbar-->
     <div class="navbar">
         <img class="logo" src="elementos\LogoSDS\logo.png"/>
         <img src="" />
@@ -24,6 +25,8 @@
         <img class="socialLogo" src="elementos\Elementos Novo Site\Parte1\Elementos\Botão7.png"/>
         <img class="socialLogo" src="elementos\Elementos Novo Site\Parte1\Elementos\Botão8.png"/>
     </div>
+
+    <!--Banner Coopere-->
     <div class="containerBanner">
         <img src="elementos\Elementos Novo Site\Parte2\Elementos\Parte2.png"/>
     </div>
@@ -52,29 +55,15 @@
           </div>
       </div>
       <div class="divisor"></div>
-      <div class="containerNoticias">
-          <div class="noticias">
-              <h1>Notícias</h1>
-              <img src="elementos\Elementos Novo Site\Parte4\Template laranja.png" />
-              <a class="button">Saiba Mais</a>
-          </div>
-          <div class="noticiasText">
-              <p>Indicadores em Saúde mental (ISM) - desafios para implementação</p>
-              <p>O Ciclo Coopere está chegando!</p>
-              <p>Conheça o Manual da Coopere</p>
-              <p>Problemas na Coopere, com quem falar?</p>
-              <a class="button">Leia todas</a>
-          </div>            
-      </div>
-      <div class="divisor"></div>
+
       <div class="containerLogin">
           <div class="login">
               <div class="loginBox">
                   <img src="elementos\LogoSDS\logoCoopere.jpg"/>
-                  <input type="text" id="user" name="user" required placeholder="Nome de Usuário ou Email">
-                  <input type="password" id="passwd" name="passwd" required placeholder="Senha">
+                  <input  tabindex="1" id="username" name="username" type="text" value="" placeholder="Nome de Usuário ou Email">
+                  <input  tabindex="2"  type="password" id="password" name="password" placeholder="Senha">
                   <label class="checkbox-container">
-                      <input type="checkbox">
+                      <input type="checkbox" name="rememberme" id="rememberme" value="true" checked="true">
                       <span class="checkmark"></span>
                       <p>Continuar conectado</p>
                   </label>
@@ -98,6 +87,24 @@
           </div>            
       </div>
       <div class="divisor"></div>
+      <!--Seção de noticias-->
+      <div class="containerNoticias">
+        <div class="noticias">
+            <h1>Notícias</h1>
+            <img src="elementos\Elementos Novo Site\Parte4\Template laranja.png" />
+            <a class="button">Saiba Mais</a>
+        </div>
+        <div class="noticiasText">
+            <p>Indicadores em Saúde mental (ISM) - desafios para implementação</p>
+            <p>O Ciclo Coopere está chegando!</p>
+            <p>Conheça o Manual da Coopere</p>
+            <p>Problemas na Coopere, com quem falar?</p>
+            <a class="button">Leia todas</a>
+        </div>            
+    </div>
+    <div class="divisor"></div>
+
+    
       <div class="">
           <h1>Sobre a Coopere</h1>
           <p>A comunidade de práticas Coopere integra o projeto 
