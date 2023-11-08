@@ -32,17 +32,17 @@ veeamPassword="wrjKprBBnjNqYyyH@**"
 veeamONEServer="https://srve068.parcorretora.corp" #You can use FQDN if you like as well
 veeamONEPort="1239" #Default Port
 
-veeamBearer=$(curl -X POST --header "Content-Type: application/x-www-form-urlencoded" --header "Accept: application/json" -H  "Content-Type: application/x-www-form-urlencoded" -d "username=$veeamUsername&password=$veeamPassword&rememberMe=&asCurrentUser=&grant_type=password&refresh_token=" "$veeamONEServer:$veeamONEPort/api/token" -k --silent | jq -r '.access_token')
+veeamBearer=$(curl --insecure -X POST --header "Content-Type: application/x-www-form-urlencoded" --header "Accept: application/json" -H  "Content-Type: application/x-www-form-urlencoded" -d "username=$veeamUsername&password=$veeamPassword&rememberMe=&asCurrentUser=&grant_type=password&refresh_token=" "$veeamONEServer:$veeamONEPort/api/token" -k --silent | jq -r '.access_token')
 
 ##
 # Building the ID to Query - Thanks, Sergey Zhukov
 #
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards"
-veeamONEFoundationUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEFoundationUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     VBRDashboardID=$(echo "$veeamONEFoundationUrl" | jq --raw-output '.[] | select(.name | startswith("Veeam Backup and Replication")) | .dashboardId')
 
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID"
-veeamONEFoundationWidgetUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEFoundationWidgetUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     VBRWBackupInfraID=$(echo "$veeamONEFoundationWidgetUrl" | jq --raw-output '.dashboardWidgets[] | select(.caption| startswith("Backup Infrastructure Inventory")) | .widgetId')    
     VBRWProtectedVMSID=$(echo "$veeamONEFoundationWidgetUrl" | jq --raw-output '.dashboardWidgets[] | select(.caption| startswith("Protected VMs Overview")) | .widgetId')    
     VBRWBackupWindowID=$(echo "$veeamONEFoundationWidgetUrl" | jq --raw-output '.dashboardWidgets[] | select(.caption| startswith("Backup Window")) | .widgetId')    
@@ -51,49 +51,49 @@ veeamONEFoundationWidgetUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer
     VBRWTopReposID=$(echo "$veeamONEFoundationWidgetUrl" | jq --raw-output '.dashboardWidgets[] | select(.caption| startswith("Top Repositories by Used Space")) | .widgetId')    
 
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWBackupInfraID/datasources"
-veeamONEFounDSBKIUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEFounDSBKIUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     VBRWBackupInfraDSID=$(echo "$veeamONEFounDSBKIUrl" | jq --raw-output '.[].datasourceId')
 
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWProtectedVMSID/datasources"
-veeamONEFounDSPVMUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEFounDSPVMUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     VBRWProtectedVMSDSID=$(echo "$veeamONEFounDSPVMUrl" | jq --raw-output '.[].datasourceId')
     
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWBackupWindowID/datasources"
-veeamONEFounDSBKWUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEFounDSBKWUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     VBRWBackupWindowDSID=$(echo "$veeamONEFounDSBKWUrl" | jq --raw-output '.[].datasourceId')
     
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWTopJobsID/datasources"
-veeamONEFounDSTopJUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEFounDSTopJUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     VBRWTopJobsDSID=$(echo "$veeamONEFounDSTopJUrl" | jq --raw-output '.[].datasourceId')
     
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWJobStatusID/datasources"
-veeamONEFounDSJobSUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEFounDSJobSUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     VBRWJobStatusDSID=$(echo "$veeamONEFounDSJobSUrl" | jq --raw-output '.[].datasourceId')
     
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWTopReposID/datasources"
-veeamONEFounDSTopRUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEFounDSTopRUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     VBRWTopReposDSID=$(echo "$veeamONEFounDSTopRUrl" | jq --raw-output '.[].datasourceId')
 
 ##
 # Veeam ONE About
 ##
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/about"
-veeamONEAboutUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEAboutUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
     version=$(echo "$veeamONEAboutUrl" | jq --raw-output ".version")
     voneserver=$(echo "$veeamONEAboutUrl" | jq --raw-output ".machine")
     
     #echo "$version $voneserver "
 
-    ##Comment the Curl while debugging
+    ##Comment the curl --insecure while debugging
     echo "Writing veeam_ONE_about to InfluxDB"
-    curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_about,voneserver=$voneserver,voneversion=$version vone=1"
+    curl --insecure -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_about,voneserver=$voneserver,voneversion=$version vone=1"
 
 ##
 # Veeam Backup & Replication Overview. This part will check The VONE v11 VBR Overview
 # Veeam Backup Window
 ##
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWBackupWindowID/datasources/$VBRWBackupWindowDSID/data?forceRefresh=false"
-veeamONEOverviewUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEOverviewUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
 
     declare -i arraybackupwindow=0
     for row in $(echo "$veeamONEOverviewUrl" | jq -r '.data[].backup'); do
@@ -106,9 +106,9 @@ veeamONEOverviewUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamB
         #echo "veeam_ONE_backupwindow,voneserver=$voneserver windowbackup=$windowbackup,windowreplica=$windowreplica,windownas=$windownas $backupwindowdate"
         arraybackupwindow=$arraybackupwindow+1
         
-        ##Comment the Curl while debugging
+        ##Comment the curl --insecure while debugging
         echo "Writing veeam_ONE_backupwindow to InfluxDB"
-        curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_backupwindow,voneserver=$voneserver windowbackup=$windowbackup,windowreplica=$windowreplica,windownas=$windownas $backupwindowdate"
+        curl --insecure -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_backupwindow,voneserver=$voneserver windowbackup=$windowbackup,windowreplica=$windowreplica,windownas=$windownas $backupwindowdate"
 
     done 
     
@@ -118,7 +118,7 @@ veeamONEOverviewUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamB
 # Protected VMs
 ##
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWProtectedVMSID/datasources/$VBRWProtectedVMSDSID/data?forceRefresh=false"
-veeamONEProtectedVMsUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEProtectedVMsUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
 
     protectedvms=$(echo "$veeamONEProtectedVMsUrl" | jq --raw-output ".data[0].number")    
     backuedupvms=$(echo "$veeamONEProtectedVMsUrl" | jq --raw-output ".data[1].number")    
@@ -178,9 +178,9 @@ veeamONEProtectedVMsUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $ve
         
     #echo "veeam_ONE_protectedvms,voneserver=$voneserver protectedvms=$protectedvms,backuedupvms=$backuedupvms,replicatedvms=$replicatedvms,unprotectedvms=$unprotectedvms,restorepoints=$restorepoints,fullbackups=$fullbackupsSize,increments=$incrementsbackupsSize,sourcevmsize=$sourceSize,successratio=$successratio"
     
-    ##Comment the Curl while debugging
+    ##Comment the curl --insecure while debugging
     echo "Writing veeam_ONE_protectedvms to InfluxDB"
-    curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_protectedvms,voneserver=$voneserver protectedvms=$protectedvms,backuedupvms=$backuedupvms,replicatedvms=$replicatedvms,unprotectedvms=$unprotectedvms,restorepoints=$restorepoints,fullbackups=$fullbackupsSize,increments=$incrementsbackupsSize,sourcevmsize=$sourceSize,successratio=$successratio"
+    curl --insecure -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_protectedvms,voneserver=$voneserver protectedvms=$protectedvms,backuedupvms=$backuedupvms,replicatedvms=$replicatedvms,unprotectedvms=$unprotectedvms,restorepoints=$restorepoints,fullbackups=$fullbackupsSize,increments=$incrementsbackupsSize,sourcevmsize=$sourceSize,successratio=$successratio"
 
  
 
@@ -189,7 +189,7 @@ veeamONEProtectedVMsUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $ve
 # Backup Infrastructure Inventory
 ##
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWBackupInfraID/datasources/$VBRWBackupInfraDSID/data?forceRefresh=false"
-veeamONEInventoryUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEInventoryUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
 
     totalvbr=$(echo "$veeamONEInventoryUrl" | jq --raw-output ".data[0].name" | awk -F"[()]" '{print $2}')    
     totalproxy=$(echo "$veeamONEInventoryUrl" | jq --raw-output ".data[1].name" | awk -F"[()]" '{print $2}')    
@@ -203,9 +203,9 @@ veeamONEInventoryUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeam
         
     #echo "veeam_ONE_backupinfrastructure,voneserver=$voneserver totalvbr=$totalvbr,totalproxy=$totalproxy,totalrepo=$totalrepo,totalbackupjob=$totalbackupjob,totalreplicajob=$totalreplicajob,totalbackupcopyjob=$totalbackupcopyjob,totalnasjob=$totalnasjob,totalcdpolicy=$totalcdpolicy"
 
-    ##Comment the Curl while debugging
+    ##Comment the curl --insecure while debugging
     echo "Writing veeam_ONE_backupinfrastructure to InfluxDB"
-    curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_backupinfrastructure,voneserver=$voneserver totalvbr=$totalvbr,totalproxy=$totalproxy,totalrepo=$totalrepo,totalbackupjob=$totalbackupjob,totalreplicajob=$totalreplicajob,totalbackupcopyjob=$totalbackupcopyjob,totalnasjob=$totalnasjob,totalcdpolicy=$totalcdpolicy"
+    curl --insecure -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_backupinfrastructure,voneserver=$voneserver totalvbr=$totalvbr,totalproxy=$totalproxy,totalrepo=$totalrepo,totalbackupjob=$totalbackupjob,totalreplicajob=$totalreplicajob,totalbackupcopyjob=$totalbackupcopyjob,totalnasjob=$totalnasjob,totalcdpolicy=$totalcdpolicy"
  
 
 ##
@@ -213,7 +213,7 @@ veeamONEInventoryUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeam
 # Jobs Status
 ##
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWJobStatusID/datasources/$VBRWJobStatusDSID/data?forceRefresh=false"
-veeamONEJobsUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEJobsUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
 
 declare -i arrayjobs=0
 for row in $(echo "$veeamONEJobsUrl" | jq -r '.data[].fail'); do
@@ -225,9 +225,9 @@ for row in $(echo "$veeamONEJobsUrl" | jq -r '.data[].fail'); do
     
     #echo "veeam_ONE_jobs,voneserver=$voneserver jobsuccess=$jobsuccess,jobwarning=$jobwarning,jobfail=$jobfail $jobdate"
 
-    ##Comment the Curl while debugging
+    ##Comment the curl --insecure while debugging
     echo "Writing veeam_ONE_jobs to InfluxDB"
-    curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_jobs,voneserver=$voneserver jobsuccess=$jobsuccess,jobwarning=$jobwarning,jobfail=$jobfail $jobdate"
+    curl --insecure -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_jobs,voneserver=$voneserver jobsuccess=$jobsuccess,jobwarning=$jobwarning,jobfail=$jobfail $jobdate"
 
     arrayjobs=$arrayjobs+1
 done  
@@ -237,7 +237,7 @@ done
 # Top Jobs by Duration
 ##
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWTopJobsID/datasources/$VBRWTopJobsDSID/data?forceRefresh=false"
-veeamONEJobsDurationUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONEJobsDurationUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
 
 lastUpdateTime=$(echo "$veeamONEJobsDurationUrl" | jq --raw-output ".lastUpdateTimeUtc")
 lastupdate=$(date -d "$lastUpdateTime" +"%s")
@@ -267,9 +267,9 @@ for row in $(echo "$veeamONEJobsDurationUrl" | jq -r '.data[].duration'); do
 
     #echo "veeam_ONE_jobsduration,voneserver=$voneserver,jobname=$jobname,jobstatus=$jobStatus,jobduration=$jobduration trend=$jobcompare $lastupdate"
 
-    ##Comment the Curl while debugging
+    ##Comment the curl --insecure while debugging
     echo "Writing veeam_ONE_jobsduration to InfluxDB"
-    curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_jobsduration,voneserver=$voneserver,jobname=$jobname,jobstatus=$jobStatus,jobduration=$jobduration trend=$jobcompare $lastupdate"
+    curl --insecure -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_jobsduration,voneserver=$voneserver,jobname=$jobname,jobstatus=$jobStatus,jobduration=$jobduration trend=$jobcompare $lastupdate"
     
     arrayjobduration=$arrayjobduration+1
     fi
@@ -281,7 +281,7 @@ done
 # Top Repositories by Used Space
 ##
 veeamONEURL="$veeamONEServer:$veeamONEPort/api/v1/dashboards/$VBRDashboardID/widgets/$VBRWTopReposID/datasources/$VBRWTopReposDSID/data?forceRefresh=false"
-veeamONERepositoriesUrl=$(curl -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
+veeamONERepositoriesUrl=$(curl --insecure -X GET $veeamONEURL -H "Authorization: Bearer $veeamBearer" -H  "accept: application/json" 2>&1 -k --silent)
 
 lastUpdateTime=$(echo "$veeamONERepositoriesUrl" | jq --raw-output ".lastUpdateTimeUtc")
 lastupdate=$(date -d "$lastUpdateTime" +"%s")
@@ -297,9 +297,9 @@ for row in $(echo "$veeamONERepositoriesUrl" | jq -r '.data[].trend'); do
 
     #echo "veeam_ONE_repositories,voneserver=$voneserver,vbrserver=$backupsrvname,repositoryname=$repositoryname repocapacity=$repocapacity,repofreespace=$repofreespace,repodaysleft=$repodaysleft,trend=$repocompare $lastupdate"
 
-    ##Comment the Curl while debugging
+    ##Comment the curl --insecure while debugging
     echo "Writing veeam_ONE_repositories to InfluxDB"
-    curl -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_repositories,voneserver=$voneserver,vbrserver=$backupsrvname,repositoryname=$repositoryname repocapacity=$repocapacity,repofreespace=$repofreespace,repodaysleft=$repodaysleft,trend=$repocompare $lastupdate"
+    curl --insecure -i -XPOST "$veeamInfluxDBURL:$veeamInfluxDBPort/write?precision=s&db=$veeamInfluxDB" -u "$veeamInfluxDBUser:$veeamInfluxDBPassword" --data-binary "veeam_ONE_repositories,voneserver=$voneserver,vbrserver=$backupsrvname,repositoryname=$repositoryname repocapacity=$repocapacity,repofreespace=$repofreespace,repodaysleft=$repodaysleft,trend=$repocompare $lastupdate"
 
     arrayrepositories=$arrayrepositories+1
 done
