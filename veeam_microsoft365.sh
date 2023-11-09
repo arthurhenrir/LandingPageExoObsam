@@ -50,7 +50,7 @@ veeamVersionUrl=$(curl -X GET --header "Accept:application/json" --header "Autho
     -b "$veeamInfluxDBBucket" \
     -o "$veeamInfluxDBOrg" \
     -p s \
-    "veeam_office365_version,veeamVersion=$veeamVersion,veeamServer=$veeamRestServer v=1"
+    "veeam_office365_version,veeamVersion=$veeamVersion,veeamServer=$veeamRestServer v=1" --skip-verify
 
 
 ##
@@ -77,7 +77,7 @@ for id in $(echo "$veeamOrgUrl" | jq -r '.[].id'); do
     -b "$veeamInfluxDBBucket" \
     -o "$veeamInfluxDBOrg" \
     -p s \
-    "veeam_office365_organization,veeamOrgName=$veeamOrgName licensedUsers=$licensedUsers,newUsers=$newUsers"
+    "veeam_office365_organization,veeamOrgName=$veeamOrgName licensedUsers=$licensedUsers,newUsers=$newUsers" --skip-verify
     
     ##
     # Veeam Backup for Microsoft 365 Users. This part will check the total Users and if they are protected or not
@@ -114,7 +114,7 @@ for id in $(echo "$veeamOrgUrl" | jq -r '.[].id'); do
     -b "$veeamInfluxDBBucket" \
     -o "$veeamInfluxDBOrg" \
     -p s \
-    "veeam_office365_overview_OD,veeamOrgName=$veeamOrgName,veeamUserName=$veeamUserName protectedUser=$protectedUser,licensedUser=$LicensedUser"
+    "veeam_office365_overview_OD,veeamOrgName=$veeamOrgName,veeamUserName=$veeamUserName protectedUser=$protectedUser,licensedUser=$LicensedUser" --skip-verify
     arrayLicensed=$arrayLicensed+1
     done
 
@@ -143,7 +143,7 @@ for id in $(echo "$veeamRepoUrl" | jq -r '.[].id'); do
     -b "$veeamInfluxDBBucket" \
     -o "$veeamInfluxDBOrg" \
     -p s \
-    "veeam_office365_repository,repository=$repository capacity=$capacity,freeSpace=$freeSpace"
+    "veeam_office365_repository,repository=$repository capacity=$capacity,freeSpace=$freeSpace" --skip-verify
   if [[ "$objectStorageId" == "null" ]]; then
         echo "It seems you are not using Object Storage offload on the Repository $repository, that's fine."
   else  
@@ -183,7 +183,7 @@ for id in $(echo "$veeamRepoUrl" | jq -r '.[].id'); do
         -b "$veeamInfluxDBBucket" \
         -o "$veeamInfluxDBOrg" \
         -p s \
-        "veeam_office365_objectstorage,objectname=$objectName,type=$type,bucketname=$bucketname,servicePoint=$servicePoint,customRegionId=$customRegionId,objectStorageEncryptionEnabled=$objectStorageEncryptionEnabled usedSpaceGB=$usedSpaceGB,immutability=$immutability"
+        "veeam_office365_objectstorage,objectname=$objectName,type=$type,bucketname=$bucketname,servicePoint=$servicePoint,customRegionId=$customRegionId,objectStorageEncryptionEnabled=$objectStorageEncryptionEnabled usedSpaceGB=$usedSpaceGB,immutability=$immutability" --skip-verify
     fi
     arrayrepo=$arrayrepo+1
 done
@@ -208,7 +208,7 @@ for id in $(echo "$veeamProxyUrl" | jq -r '.[].id'); do
     -b "$veeamInfluxDBBucket" \
     -o "$veeamInfluxDBOrg" \
     -p s \
-    "veeam_office365_proxies,proxies=$hostName,status=$status threadsNumber=$threadsNumber"
+    "veeam_office365_proxies,proxies=$hostName,status=$status threadsNumber=$threadsNumber" --skip-verify
     arrayprox=$arrayprox+1
 done
 
@@ -262,7 +262,7 @@ for id in $(echo "$veeamJobsUrl" | jq -r '.[].id'); do
             -b "$veeamInfluxDBBucket" \
             -o "$veeamInfluxDBOrg" \
             -p s \
-            "veeam_office365_jobs,veeamjobname=$nameJob,bottleneck=$bottleneck totalDuration=$totalDuration,status=$jobStatus,processingRate=$processingRate,readRate=$readRate,writeRate=$writeRate,transferredData=$transferredData,processedObjects=$processedObjects $endTimeUnix"
+            "veeam_office365_jobs,veeamjobname=$nameJob,bottleneck=$bottleneck totalDuration=$totalDuration,status=$jobStatus,processingRate=$processingRate,readRate=$readRate,writeRate=$writeRate,transferredData=$transferredData,processedObjects=$processedObjects $endTimeUnix" --skip-verify
             if [[ $arrayJobsSessions = "1000" ]]; then
                 break
             else
@@ -297,7 +297,7 @@ veeamRestorePortalUrl=$(curl -X GET --header "Accept:application/json" --header 
     -b "$veeamInfluxDBBucket" \
     -o "$veeamInfluxDBOrg" \
     -p s \
-    "veeam_office365_restoreportal,veeamServer=$veeamRestServer,restorePortalAppId=$restorePortalAppId restorePortalEnabled=$restorePortal"
+    "veeam_office365_restoreportal,veeamServer=$veeamRestServer,restorePortalAppId=$restorePortalAppId restorePortalEnabled=$restorePortal" --skip-verify
 
 ##
 # Veeam Backup for Microsoft 365 RBAC Roles. This part will check the the RBAC Roles, and what privileges they have
@@ -338,7 +338,7 @@ for id in $(echo "$veeamRbacRoleUrl" | jq -r '.[].id'); do
             -b "$veeamInfluxDBBucket" \
             -o "$veeamInfluxDBOrg" \
             -p s \
-            "veeam_office365_rbac_operators,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=User,rbacROName=$rbacROName,rbacRO365Name=$rbacRO365Name rbacRoleAdminId=$arrayRbacRolesOperators"
+            "veeam_office365_rbac_operators,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=User,rbacROName=$rbacROName,rbacRO365Name=$rbacRO365Name rbacRoleAdminId=$arrayRbacRolesOperators" --skip-verify
         ;;
         Group)
             rbacROName=$(echo "$veeamRbacRoleOperatorUrl" | jq --raw-output ".[$arrayRbacRolesOperators].group.displayName" | awk '{gsub(/ /,"\\ ");print}')
@@ -351,7 +351,7 @@ for id in $(echo "$veeamRbacRoleUrl" | jq -r '.[].id'); do
             -b "$veeamInfluxDBBucket" \
             -o "$veeamInfluxDBOrg" \
             -p s \
-            "veeam_office365_rbac_operators,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=$rbacRO365Type,rbacROName=$rbacROName,rbacRO365Name=$rbacRO365Name rbacRoleAdminId=$arrayRbacRolesOperators"
+            "veeam_office365_rbac_operators,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=$rbacRO365Type,rbacROName=$rbacROName,rbacRO365Name=$rbacRO365Name rbacRoleAdminId=$arrayRbacRolesOperators" --skip-verify
         ;;
         esac
         arrayRbacRolesOperators=$arrayRbacRolesOperators+1
@@ -377,7 +377,7 @@ for id in $(echo "$veeamRbacRoleUrl" | jq -r '.[].id'); do
             -b "$veeamInfluxDBBucket" \
             -o "$veeamInfluxDBOrg" \
             -p s \
-            "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=User,rbacRoleScopeName=$rbacRoleScopeName,rbacRoleScope365Name=$rbacRoleScope365Name rbacRoleScopeId=$arrayRbacRoles"
+            "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=User,rbacRoleScopeName=$rbacRoleScopeName,rbacRoleScope365Name=$rbacRoleScope365Name rbacRoleScopeId=$arrayRbacRoles" --skip-verify
         ;;
         Group)
             rbacRoleScopeName=$(echo "$veeamRbacRoleUrlScope" | jq --raw-output ".[$arrayRbacRolesScope].group.displayName" | awk '{gsub(/ /,"\\ ");print}')
@@ -390,7 +390,7 @@ for id in $(echo "$veeamRbacRoleUrl" | jq -r '.[].id'); do
             -b "$veeamInfluxDBBucket" \
             -o "$veeamInfluxDBOrg" \
             -p s \
-            "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=$rbacRoleScope365Type,rbacRoleScopeName=$rbacRoleScopeName,rbacRoleScope365Name=$rbacRoleScope365Name rbacRoleScopeId=$arrayRbacRoles"
+            "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=$rbacRoleScope365Type,rbacRoleScopeName=$rbacRoleScopeName,rbacRoleScope365Name=$rbacRoleScope365Name rbacRoleScopeId=$arrayRbacRoles" --skip-verify
         ;;
         Site)
             rbacRoleScopeName=$(echo "$veeamRbacRoleUrlScope" | jq --raw-output ".[$arrayRbacRolesScope].site.title" | awk '{gsub(/ /,"\\ ");print}')
@@ -401,7 +401,7 @@ for id in $(echo "$veeamRbacRoleUrl" | jq -r '.[].id'); do
             -b "$veeamInfluxDBBucket" \
             -o "$veeamInfluxDBOrg" \
             -p s \
-            "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=Site,rbacRoleScopeName=$rbacRoleScopeName,rbacRoleScope365Name=$rbacRoleScopeName rbacRoleScopeId=$arrayRbacRoles"
+            "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=Site,rbacRoleScopeName=$rbacRoleScopeName,rbacRoleScope365Name=$rbacRoleScopeName rbacRoleScopeId=$arrayRbacRoles" --skip-verify
         ;;
         esac
         arrayRbacRolesScope=$arrayRbacRolesScope+1
@@ -414,7 +414,7 @@ for id in $(echo "$veeamRbacRoleUrl" | jq -r '.[].id'); do
         -b "$veeamInfluxDBBucket" \
         -o "$veeamInfluxDBOrg" \
         -p s \
-        "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=EntireOrganization,rbacRoleScopeName="EntireOrganization",rbacRoleScope365Name="EntireOrganization" rbacRoleScopeId=$arrayRbacRoles"
+        "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleName=$rbacRoleName,type=EntireOrganization,rbacRoleScopeName="EntireOrganization",rbacRoleScope365Name="EntireOrganization" rbacRoleScopeId=$arrayRbacRoles" --skip-verify
     fi     
     #echo "veeam_office365_rbac_roles,organization=$rbacOrganization,rbacRoleId=$rbacRoleId,rbacRoleName=$rbacRoleName,rbacRoleDescription=$rbacRoleDescription,rbacRoleType=$rbacRoleType rbacRoleAdminId=$arrayRbacRoles"
     echo "Writing veeam_office365_rbac_scope to InfluxDB" 
@@ -423,6 +423,6 @@ for id in $(echo "$veeamRbacRoleUrl" | jq -r '.[].id'); do
     -b "$veeamInfluxDBBucket" \
     -o "$veeamInfluxDBOrg" \
     -p s \
-    "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleId=$rbacRoleId,rbacRoleName=$rbacRoleName,rbacRoleDescription=$rbacRoleDescription,rbacRoleType=$rbacRoleType rbacRoleAdminId=$arrayRbacRoles"
+    "veeam_office365_rbac_scope,organization=$rbacOrganization,rbacRoleId=$rbacRoleId,rbacRoleName=$rbacRoleName,rbacRoleDescription=$rbacRoleDescription,rbacRoleType=$rbacRoleType rbacRoleAdminId=$arrayRbacRoles" --skip-verify
     arrayRbacRoles=$arrayRbacRoles+1
 done
